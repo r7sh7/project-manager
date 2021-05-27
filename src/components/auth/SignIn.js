@@ -5,7 +5,9 @@ function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+
+            e.preventDefault();
             console.log({email: email, password: password});
     }
 
@@ -22,7 +24,7 @@ function SignIn() {
                     <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className="input-field">
-                    <button className="btn pink lighten-1 z-depth-0">Login</button>
+                    <button className="btn pink lighten-1 z-depth-0">Log In</button>
                 </div>
             </form>
         </div>
