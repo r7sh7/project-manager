@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createProjectAction } from '../../store/actions/projectActions';
 
-function CreateProject() {
+const CreateProject = () => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
+    const project = {title, content}
+
+    const dispatch = useDispatch();
+
     const handleSubmit = (e) => {
 
             e.preventDefault();
-            console.log({title: title, content: content});
+            // console.log({title: title, content: content});
+            dispatch(createProjectAction(project));
     }
 
     return (
@@ -21,7 +28,7 @@ function CreateProject() {
                 </div>
                 <div className="input-field">
                     <label htmlFor="content">Project Content</label>
-                    <textarea id="content" className="materialize-textarea" onChange={(e) => setContent(e.target.value)} ></textarea>
+                    <textarea id="content" className="materialize-textarea" value={content} onChange={(e) => setContent(e.target.value)} ></textarea>
                 </div>
                 <div className="input-field">
                     <button className="btn pink lighten-1 z-depth-0">Create</button>
