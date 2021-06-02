@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+
 import ProjectSummary from './ProjectSummary';
 //section is to give a little space around the actual div 
 //z-depth-0 for no shadow to the card 
@@ -16,11 +18,12 @@ const ProjectList = ({projects}) => {
         <div className="project-list section">
             {projects && projects.map((project) => {
                  return(
-                    <ProjectSummary project={project} key={project.id} />
+                     <Link to={'/project/' + project.id} key={project.id}>
+                         <ProjectSummary project={project} />
+                     </Link>
                  )   
             })}
         </div>
-        
     );
 }
  
