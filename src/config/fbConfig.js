@@ -12,6 +12,7 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  firebase.firestore().settings({ timeStampsInSnapshots: true });
+  firebase.firestore().settings({ timeStampsInSnapshots: true, merge:true });
 
   export default firebase; //to be able to import it elsewhere and interract with our project
+
