@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"; //we get an active class when the pa
 
 import { signOut } from '../../store/actions/authActions'
 
-    const SignedInLinks = () => {
+    const SignedInLinks = ({profile}) => {
     
     const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ import { signOut } from '../../store/actions/authActions'
           <ul className="right">
               <li><NavLink to='/create'>New Project</NavLink></li>
               <li><a onClick = {handleClick}> Log Out</a></li>
-              <li><NavLink to='/' className="btn btn-floating pink lighten -1">HB</NavLink></li>
+              <li><NavLink to='/' className="btn btn-floating pink lighten -1">{profile.initials}</NavLink></li>
           </ul>
     );
 }
