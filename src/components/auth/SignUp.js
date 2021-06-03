@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 
 function SignUp() {
 
@@ -13,6 +15,10 @@ function SignUp() {
             console.log({email: email, password: password, fname: firstName, lname: lastName});
     }
 
+    const auth = useSelector(state => {
+        return(state.firebase.auth);
+    })
+    if(auth.uid) return <Redirect to='/' /> 
     return (
         <div className="container">
             <form onSubmit={handleSubmit} className="white">

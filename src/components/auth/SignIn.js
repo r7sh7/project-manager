@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
-import { useDispatch, connect } from 'react-redux'
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 
 import { signIn } from '../../store/actions/authActions'
 
 const SignIn = (props) => {
 
-    // const dispatch = useDispatch(); //instead of mapDispatchToProps and connect 
+    // const dispatch = useDispatch(); //import useDispatch and use instead of connect(null,mapDispatchToProps)
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {authError, signIn} = props;
+    const {authError, auth, signIn} = props;
 
     const handleSubmit = (e) => {
 
@@ -20,6 +21,8 @@ const SignIn = (props) => {
             // dispatch(signIn({email: email, password: password})) //if useDispatch was used 
     }
 
+
+    if(auth.uid) return <Redirect to='/' /> 
     return (
         <div className="container">
             <form onSubmit={handleSubmit} className="white">
@@ -52,7 +55,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return{
-        authError: state.auth.authError //(state) of rootReducer -> authReducer(auth) -> property(initState) of authReducer (authError)
+        authError: state.auth.authError, //(state) of rootReducer -> authReducer(auth) -> property(initState) of authReducer (authError)
+        auth: state.firebase.auth
     }
 }
 
