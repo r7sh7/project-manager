@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 import { createProjectAction } from '../../store/actions/projectActions';
 
 const CreateProject = () => {
@@ -17,7 +19,10 @@ const CreateProject = () => {
             // console.log({title: title, content: content});
             dispatch(createProjectAction(project));
     }
-
+    const auth = useSelector(state => {
+        return(state.firebase.auth);
+    })
+    if(!auth.uid) return <Redirect to='/signin' />
     return (
         <div className="container">
             <form onSubmit={handleSubmit} className="white">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
+import { Redirect } from 'react-router';
 
 import ProjectList from '../projects/ProjectList';
 import Notifications from './Notifications';
@@ -24,6 +25,10 @@ const Dashboard = () => {
     //     return state.project.projects;
     // });
 
+    const auth = useSelector(state => {
+        return(state.firebase.auth);
+    })
+    if(!auth.uid) return <Redirect to='/signin' /> 
     return (  
         <div className="dashboard container">
             <div className="row">
