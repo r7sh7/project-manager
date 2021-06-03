@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { createProjectAction } from '../../store/actions/projectActions';
 
-const CreateProject = () => {
+const CreateProject = (props) => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -14,14 +14,16 @@ const CreateProject = () => {
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
-
             e.preventDefault();
             // console.log({title: title, content: content});
             dispatch(createProjectAction(project));
+            props.history.push('/');
     }
+
     const auth = useSelector(state => {
         return(state.firebase.auth);
     })
+
     if(!auth.uid) return <Redirect to='/signin' />
     return (
         <div className="container">
