@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import thunk from 'redux-thunk';
-import { getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { getFirebase, isLoaded, ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
 
 import './index.css';
@@ -23,11 +23,22 @@ const rrfProps = {
   createFirestoreInstance,
 }
 
+
+function AuthIsLoaded({children}) {
+  const auth = useSelector(state => state.firebase.auth);
+  if(!isLoaded(auth))
+    return <div>Loading Screen</div>;
+  return children;
+
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...rrfProps} >
-      <App />
+      <AuthIsLoaded>
+          <App />
+      </AuthIsLoaded>
       </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,
