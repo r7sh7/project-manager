@@ -13,12 +13,17 @@ import Notifications from './Notifications';
 const Dashboard = () => {
 
     useFirestoreConnect([
-        {collection:'projects'}
+        {collection: 'projects', orderBy: ['createdAt']},
+        {collection: 'notifications', orderBy: ['time', 'desc'], limit: 5 }
     ])
 
     const projects = useSelector(state => {
         // console.log(state);
         return (state.firestore.ordered.projects);
+    })
+
+    const notifications = useSelector(state => {
+        return (state.firestore.ordered.notifications);
     })
     // const projects = useSelector(state => {
     //     console.log(state);
@@ -33,7 +38,7 @@ const Dashboard = () => {
         <div className="dashboard container">
             <div className="row">
                 <div className="col s12 m6"><ProjectList projects={projects} /></div>
-                <div className="col s12 m5 offset-m1"><Notifications /></div>
+                <div className="col s12 m5 offset-m1"><Notifications notifs={notifications}/></div>
             </div>
         </div>
     );
