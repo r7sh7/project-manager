@@ -14,7 +14,7 @@ const Dashboard = () => {
 
     useFirestoreConnect([
         {collection: 'projects', orderBy: ['createdAt']},
-        {collection: 'notifications', orderBy: ['time', 'desc'], limit: 5 }
+        {collection: 'notifications', orderBy: ['time', 'desc'], limit: 3 }
     ])
 
     const projects = useSelector(state => {
